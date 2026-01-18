@@ -10,6 +10,7 @@ import com.example.airqualityb.repository.CountryRepository
 import com.example.airqualityb.repository.StateRepository
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
+import kotlin.math.log
 
 @Service
 class LocationService(
@@ -57,7 +58,7 @@ class LocationService(
     fun getCities(countryName: String, stateName: String): List<String> {
 
         // Se verifica que el país y el estado existan en la bd
-        val country = countryRepository.findById(countryName).orElseThrow { Exception("País no encontrado") }
+        val country = countryRepository.findByName(countryName).orElseThrow { Exception("País no encontrado") }
         val state = stateRepository.findByName(stateName).orElseThrow { Exception("Estado no encontrado") }
 
         val localCities = cityRepository.findByState(state)

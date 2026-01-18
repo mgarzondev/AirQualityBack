@@ -24,6 +24,9 @@ dependencies {
     // Permite que la aplicación sea un servidor web capaz de manejar muchas peticiones simultáneas
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
+    // DOCUMENTACIÓN (Swagger específico para WebFlux)
+    implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.3.0")
+
     // Librerias necesarias para que Spring Boot pueda analizar el código
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
