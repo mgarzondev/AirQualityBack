@@ -10,7 +10,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew dependencies --no-daemon
 
 COPY src src
-RUN ./gradlew bootJar -x test --no-daemon
+RUN ./gradlew bootJar -x test -x check --no-daemon
 
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
