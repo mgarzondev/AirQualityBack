@@ -12,28 +12,28 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/air-quality")
+@RequestMapping("/api/air-quality/")
 @Tag(name = "Calidad del Aire", description = "Endpoints para consultar datos climáticos Clima y Calidad de Aire")
 class LocationController(private val locationService: LocationService) {
 
     @Operation(summary = "Obtener paises admitidos", description = "Retorna paises admitidos para la lectura de datos climáticos en tiempo real.")
-    @GetMapping("/countries")
+    @GetMapping("countries")
     fun getCountries() = locationService.getCountries()
 
     @Operation(summary = "Obtener estados de un país especifico", description = "Retorna estados de un pais admitido.")
-    @GetMapping("/states/{country}")
+    @GetMapping("{states}/{country}")
     fun getStates(@PathVariable country: String) = locationService.getStates(country)
 
     @Operation(summary = "Obtener ciudades pertenecientes a un estado dentro de un pais especifico.", description = "Retorna todas las ciudades pertenecientes a un estado especifico.")
-    @GetMapping("/city/{country}/{state}")
+    @GetMapping("{city}/{country}/{state}")
     fun getCity(@PathVariable country: String, @PathVariable state: String) = locationService.getCities(country,state)
 
     @Operation(summary = "Obtener datos climáticos en tiempo real.", description = "Retorna datos climáticos en tiempo real de una ciudad especifica.")
-    @GetMapping("/weather")
+    @GetMapping("weather/{city}/{state}/{country}")
     fun getWeather(
-        @RequestParam city: String,
-        @RequestParam state: String,
-        @RequestParam country: String
+        @PathVariable city: String,
+        @PathVariable state: String,
+        @PathVariable country: String
     ): WeatherAirData {
         return locationService.getWeatherData(city, state, country)
     }
